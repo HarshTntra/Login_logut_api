@@ -302,9 +302,17 @@ Devise.setup do |config|
   # ActiveSupport.on_load(:devise_failure_app) do
   #   include Turbolinks::Controller
   # end
-
+  Devise.setup do |config|
+    config.warden do |manager|
+      manager.failure_app = CustomWardenFailure
+    end
+  end
   # ==> Configuration for :registerable
-
+  config.jwt do |jwt|
+    jwt.secret = '959cf52d4c28f04e32c06671da92809fca16cd1d169d870087ad98f497b50f269406d81c5bf4cd1fc09f617c09475d294f5a3afb7b1c50f1e06bf366105a8bde'
+    jwt.expiration_time = 4.days.to_i
+  end
+  
   # When set to false, does not sign a user in automatically after their password is
   # changed. Defaults to true, so a user is signed in automatically after changing a password.
   # config.sign_in_after_change_password = true
